@@ -19,8 +19,7 @@ LoadGui()
 
 ; -----------------------------------------------------------------------
 
-LoadConfigs(configFile)
-{
+LoadConfigs(configFile) {
     IniRead, heySpacePath, %configFile%, HeySpace, ExePath
     IniRead, heySpaceHotKey, %configFile%, HeySpace, HotKey
     HotKey(heySpaceHotKey, "RunHeyspace", heySpacePath)
@@ -69,10 +68,9 @@ LoadConfigs(configFile)
     }
 }
 
-LoadGui()
-{
-    Gui Alpha:New, +Hwndswitchgui
-    Gui, Margin, 0, 0
-    Gui Font, S30 cBlue Bold
-    Gui, Add, ListBox, w800 vMyListBox gMyListBox, |
+LoadGui() {
+    Gui 1:Default
+    Gui 1:New, +Hwndswitchgui
+    Gui 1:Font, Lucida Console S18 cNavy Bold
+    Gui 1:Add, ListView, xm r20 w1000 gMyListView AltSubmit, Title|App|Pid
 }

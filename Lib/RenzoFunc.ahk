@@ -1,6 +1,5 @@
 ; 运行格式化空格
-RunHeyspace(heyspacePath)
-{
+RunHeyspace(heyspacePath) {
     RunWait, %heyspacePath%,,Hide
     showText("heyspace format success")
     return
@@ -14,4 +13,8 @@ Hotkey(hk, fun, arg*) {
 Hotkey_Handle:
     funs[A_ThisHotkey].(args[A_ThisHotkey]*)
     Return
+}
+
+Msg(msg) {
+    MsgBox, %msg%
 }

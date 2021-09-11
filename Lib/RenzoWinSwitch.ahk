@@ -7,7 +7,7 @@ global winPathToIDMap := new HashTable()
 ; 参数 3：title regex：匹配正确的标题（\S 非空即可)
 ToggleApp(exePath, titleClass := "", titleRegexToGetPID := "", recheck := True, activeTray := False)
 {
-    global debug := False
+    global debug := True
     ; path, app.exe, app
     SplitPath, exePath, exeName, , , noExt
 
