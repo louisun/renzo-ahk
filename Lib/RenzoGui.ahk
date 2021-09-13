@@ -126,17 +126,18 @@ Return
 generateListView(idList, currentWinID) {
         global guiHWND
         global switchgui
+        imageCount := 0
+
         LV_Delete()
-        ImageIDList := IL_Create(10, 10, 1)
+        ImageIDList := IL_Create(10,, 1)
         LV_SetImageList(ImageIDList, 1)
+
 
         Loop, %idList%
         {
             winID := idList%A_Index%
             WinGet, processPath, ProcessPath, ahk_id %winID%
             WinGet, processName, ProcessName, ahk_id %winID%
-            ; load icon
-            IL_Add(ImageIDList, processPath)
 
             If (winID = currentWinID) {
                 Continue
@@ -144,21 +145,24 @@ generateListView(idList, currentWinID) {
 
             WinGetTitle, winTitle, ahk_id %winID%
 
-            If (StrLen(winTitle) = 0 || winTitle = "Program Manager") {
+            If (StrLen(winTitle) = 0 || winTitle = "Program Manager" || winTitle = "Cortana") {
                 Continue
             }
 
+            ; load icon
+            IL_Add(ImageIDList, processPath)
+            imageCount += 1
 
             titleSplitList := StrSplit(winTitle, " - ",,2)
             If (titleSplitList.Length() = 2) {
                 winTitle := titleSplitList[1]
             }
 
-            If (StrLen(winTitle) > 30) {
-                winTitle := SubStr(winTitle, 1, 30)
+            If (StrLen(winTitle) > 50) {
+                winTitle := SubStr(winTitle, 1, 50)
             }
 
-            LV_Add("Icon" . A_Index, winTitle, processName, winID)
+            LV_Add("Icon" . imageCount, winTitle, processName, winID)
         }
 
         LV_Modify(1, "Focus")

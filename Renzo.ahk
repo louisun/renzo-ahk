@@ -71,6 +71,6 @@ LoadConfigs(configFile) {
 LoadGui() {
     Gui 1:Default
     Gui 1:New, +Hwndswitchgui
-    Gui 1:Font, Lucida Console S18 cNavy Bold
+    Gui 1:Font, S12 cNavy, Microsoft YaHei
     Gui 1:Add, ListView, xm r20 w1000 gMyListView AltSubmit, Title|App|Pid
 }
