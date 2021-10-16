@@ -1,5 +1,9 @@
 CapsLock::LWin
 
+; win shift alt
+CapsLock::SendInput, {Lwin Down}{Alt Down}{LShift Down}
+CapsLock Up::SendInput, {Lwin Up}{Alt Up}{LShift Up}
+
 LAlt & Left::
 	Send, #{Left}
 	Return
@@ -36,6 +40,19 @@ LControl & Up::
 LControl & Down::
     Send {Volume_Down 5}
     Return
+
+; 亮度调整
+^Left::ChangeBrightness(-10)
+^Right::ChangeBrightness(10)
+!Numpad0::Send, {F11}
+Numpad1::Send, {F1}
+Numpad2::Send, {F2}
+Numpad3::Send, {F3}
+Numpad4::Send, {F4}
+Numpad5::Send, {F5}
+Numpad6::Send, {F6}
+Numpad7::Send, {F7}
+Numpad8::Send, {F8}
 
 ; 将 Alt 与 Ctrl 部分组合键互换
 !w::Send, ^w

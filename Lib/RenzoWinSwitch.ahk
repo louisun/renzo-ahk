@@ -7,7 +7,7 @@ global winPathToIDMap := new HashTable()
 ; 参数 3：title regex：匹配正确的标题（\S 非空即可)
 ToggleApp(exePath, titleClass := "", titleRegexToGetPID := "", recheck := True, activeTray := False)
 {
-    global debug := True
+    global debug := False
     ; path, app.exe, app
     SplitPath, exePath, exeName, , , noExt
 
@@ -80,10 +80,14 @@ ToggleApp(exePath, titleClass := "", titleRegexToGetPID := "", recheck := True, 
     {
         ahkID := getMainProcessID(exeName, titleClass, titleRegexToGetPID)
         If winPathToIDMap.HasKey(exePath) {
-            if debug {
+            If debug {
                 ShowText("<" . exeName . " | pid = " .  ahkID . "> not active, active now (from map)")
             }
             activeWinID(exeName, winPathToIDMap.Get(exePath), activeTray)
+            If !WinActive("ahk_exe " . exeName)
+            {
+                activeWinID(exeName, ahkID, activeTray)
+            }
         } Else {
             activeWinID(exeName, ahkID, activeTray)
             ; WinActivate, ahk_id %ahkID%

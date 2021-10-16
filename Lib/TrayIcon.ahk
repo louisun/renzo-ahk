@@ -85,6 +85,9 @@ TrayIcon_GetInfo(sExeName := "")
 
             If ( !sExeName || sExeName == sProcess || sExeName == nPid )
             {
+                ; Msg(sExeName)
+                ; Msg(hwnd)
+                ; Msg(nPid)
                 DllCall("ReadProcessMemory", Ptr,hProc, Ptr,iString, Ptr,&tip, UPtr,szTip, UPtr,0)
                 oTrayInfo.Push({ "idx"     : A_Index-1
                                , "idcmd"   : idCmd
