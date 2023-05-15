@@ -85,9 +85,6 @@ TrayIcon_GetInfo(sExeName := "")
 
             If ( !sExeName || sExeName == sProcess || sExeName == nPid )
             {
-                ; Msg(sExeName)
-                ; Msg(hwnd)
-                ; Msg(nPid)
                 DllCall("ReadProcessMemory", Ptr,hProc, Ptr,iString, Ptr,&tip, UPtr,szTip, UPtr,0)
                 oTrayInfo.Push({ "idx"     : A_Index-1
                                , "idcmd"   : idCmd
@@ -261,6 +258,7 @@ TrayIcon_GetHotItem()
 ; ----------------------------------------------------------------------------------------------------------------------
 TrayIcon_Button(sExeName, sButton:="L", bDouble:=False, nIdx:=1)
 {
+    ; 开启检测 hidden window
     d := A_DetectHiddenWindows
     DetectHiddenWindows, On
     WM_MOUSEMOVE      = 0x0200
@@ -273,12 +271,15 @@ TrayIcon_Button(sExeName, sButton:="L", bDouble:=False, nIdx:=1)
     WM_MBUTTONDOWN    = 0x0207
     WM_MBUTTONUP      = 0x0208
     WM_MBUTTONDBLCLK  = 0x0209
+    ; WM_LButton 是什么
     sButton := "WM_" sButton "BUTTON"
+    ; 根据 exe path 获取 icon 对象
     oIcons  := TrayIcon_GetInfo(sExeName)
     If ( bDouble )
         PostMessage, oIcons[nIdx].msgid, oIcons[nIdx].uid, %sButton%DBLCLK,, % "ahk_id " oIcons[nIdx].hwnd
     Else
     {
+        ; 发送点击信息, icon 的 msg id, uid, hwnd
         PostMessage, oIcons[nIdx].msgid, oIcons[nIdx].uid, %sButton%DOWN,, % "ahk_id " oIcons[nIdx].hwnd
         PostMessage, oIcons[nIdx].msgid, oIcons[nIdx].uid, %sButton%UP,, % "ahk_id " oIcons[nIdx].hwnd
     }

@@ -1,8 +1,17 @@
-CapsLock::LWin
+; CapsLock::LWin
+*CapsLock::
+  SetKeyDelay -1
+  Send {Blind}{Ctrl DownTemp}{Alt DownTemp}{Shift DownTemp}
+return
+
+*CapsLock up::
+  SetKeyDelay -1
+  Send {Blind}{Ctrl Up}{Alt Up}{Shift Up}
+return
 
 ; win shift alt
-CapsLock::SendInput, {Lwin Down}{Alt Down}{LShift Down}
-CapsLock Up::SendInput, {Lwin Up}{Alt Up}{LShift Up}
+; CapsLock::SendInput, {Lwin Down}{Alt Down}{LShift Down}
+; CapsLock Up::SendInput, {Lwin Up}{Alt Up}{LShift Up}
 
 LAlt & Left::
 	Send, #{Left}
@@ -44,15 +53,16 @@ LControl & Down::
 ; 亮度调整
 ^Left::ChangeBrightness(-10)
 ^Right::ChangeBrightness(10)
-!Numpad0::Send, {F11}
-Numpad1::Send, {F1}
-Numpad2::Send, {F2}
-Numpad3::Send, {F3}
-Numpad4::Send, {F4}
-Numpad5::Send, {F5}
-Numpad6::Send, {F6}
-Numpad7::Send, {F7}
-Numpad8::Send, {F8}
+; Numpad1::Send, {F1}
+; Numpad2::Send, {F2}
+; Numpad3::Send, {F3}
+; Numpad4::Send, {F4}
+; Numpad5::Send, {F5}
+; Numpad6::Send, {F6}
+; Numpad7::Send, {F7}
+; Numpad8::Send, {F8}
+; Numpad9::Send, {F9}
+; Numpad0::Send, {F11}
 
 ; 将 Alt 与 Ctrl 部分组合键互换
 !w::Send, ^w
@@ -74,8 +84,24 @@ Numpad8::Send, {F8}
 !-::Send, ^-
 #IfWinActive
 
+#IfWinActive ahk_exe msedge.exe
+!l::Send, ^l
+!j::Send, ^j
+!t::Send, ^t
+!r::Send, ^r
+!=::Send, ^=
+!-::Send, ^-
+#IfWinActive
+
 #IfWinActive ahk_exe typora.exe
 !i::Send, ^i
 !b::Send, ^b
 !/::Send, ^/
+#IfWinActive
+
+#IfWinActive ahk_exe obsidian.exe
+!i::Send, ^i
+!b::Send, ^b
+!/::Send, ^/
+!t::Send, ^t
 #IfWinActive

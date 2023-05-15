@@ -80,48 +80,49 @@ GuiClose:
     Return
 
 ; Toggle Switch GUI
-!`::
-    WinGetClass, currentClass, A
-    WinGet, currentWinID,,A
-    WinGet, processName, ProcessName, ahk_class %currentClass%
-    ; 通过 processName 获取 id 列表，会根据 id 唤起窗口
-    WinGet, idList, List, ahk_exe %processName%
+; !*ESC::
+; !ESC::
+;     WinGetClass, currentClass, A
+;     WinGet, currentWinID,,A
+;     WinGet, processName, ProcessName, ahk_class %currentClass%
+;     ; 通过 processName 获取 id 列表，会根据 id 唤起窗口
+;     WinGet, idList, List, ahk_exe %processName%
+;
+;     If (WinExist("ahk_id " switchgui)) {
+;         LV_Delete()
+;         Gui %switchgui%: Hide
+;         Return
+;     }
+;
+;     ; idList 值为长度
+;     If (idList > 2) {
+;         generateListView(idList, currentWinID)
+;         Return
+;     }
+;
+;     If idList = 2
+;     {
+;         Loop, % idList {
+;             winID := idList%A_Index%
+;             If (winID = currentWinID) {
+;                 continue
+;             }
+;             WinActivate, ahk_id %winID%
+;         }
+;         Return
+;     }
+; Return
 
-    If (WinExist("ahk_id " switchgui)) {
-        LV_Delete()
-        Gui %switchgui%: Hide
-        Return
-    }
-
-    ; idList 值为长度
-    If (idList > 2) {
-        generateListView(idList, currentWinID)
-        Return
-    }
-
-    If idList = 2
-    {
-        Loop, % idList {
-            winID := idList%A_Index%
-            If (winID = currentWinID) {
-                continue
-            }
-            WinActivate, ahk_id %winID%
-        }
-        Return
-    }
-Return
-
-^Space::
-    If (WinExist("ahk_id " switchgui)) {
-        LV_Delete()
-        Gui %switchgui%: Hide
-        Return
-    }
-
-    WinGet, idList, List
-    generateListView(idList, "")
-Return
+; ^Space::
+;     If (WinExist("ahk_id " switchgui)) {
+;         LV_Delete()
+;         Gui %switchgui%: Hide
+;         Return
+;     }
+;
+;     WinGet, idList, List
+;     generateListView(idList, "")
+; Return
 
 generateListView(idList, currentWinID) {
         global guiHWND
